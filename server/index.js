@@ -7,21 +7,25 @@ const dotenv = require('dotenv');
 
 dotenv.config();
 const authRoutes = require('./router/auth');
+const oauthRoutes=require('./router/oauth');
+require('./config/passport');
 
 const app=express();
+
 app.use(express.json());
 app.use(cookieParser());
 app.use(session({ secret: 'your-secret-key', resave: false, saveUninitialized: false }));
 
-// Initialize Passport
 app.use(passport.initialize());
 app.use(passport.session());
+
 mongoose.connect(process.env.MONGO_URI)
   .then(() => console.log('MongoDB connected'))
   .catch((err) => console.error(err));
 
 // Use Routes
 app.use('/api/auth', authRoutes);
+app.use('/auth', oauthRoutes);
 
 const PORT = process.env.PORT || 3000;
 
