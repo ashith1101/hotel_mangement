@@ -10,6 +10,7 @@ dotenv.config();
 const authRoutes = require('./router/auth');
 const oauthRoutes=require('./router/oauth');
 const menuRoutes=require('./router/menuRoute');
+const qrRoutes=require('./router/qrRoutes');
 require('./config/passport');
 
 const app=express();
@@ -30,6 +31,7 @@ mongoose.connect(process.env.MONGO_URI)
 app.use('/api/auth', authRoutes);
 app.use('/auth', oauthRoutes);
 app.use('/api/menu', menuRoutes);
+app.use('/api/qr', qrRoutes);  
 const PORT = process.env.PORT || 3000;
 
 app.listen(PORT, () => {
