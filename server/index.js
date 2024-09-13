@@ -11,6 +11,8 @@ const authRoutes = require('./router/auth');
 const oauthRoutes=require('./router/oauth');
 const menuRoutes=require('./router/menuRoute');
 const qrRoutes=require('./router/qrRoutes');
+const reservationRoutes=require('./router/reservationRouter');
+const waitlistRoutes=require('./router/waitlistRouter');
 require('./config/passport');
 
 const app=express();
@@ -32,6 +34,8 @@ app.use('/api/auth', authRoutes);
 app.use('/auth', oauthRoutes);
 app.use('/api/menu', menuRoutes);
 app.use('/api/qr', qrRoutes);  
+app.use('/api/reservation', reservationRoutes);
+app.use('/api/waitlist', waitlistRoutes);
 const PORT = process.env.PORT || 3000;
 
 app.listen(PORT, () => {
